@@ -1,4 +1,5 @@
 <script>
+import { ref,computed } from 'vue'
 export default {
     name: 'AboutPage',
     setup() {
@@ -15,7 +16,20 @@ export default {
             id: 3, name: "Swara", gender: "Female", city: "Dadar"
         }]
         const n = data.length
-        return { data, n }
+        const cityLists = data.reduce((acc, curr) => {
+  if (!acc.includes(curr.city)) {
+    acc.push(curr.city)
+  }
+  return acc
+}, [])
+
+const cityName = ref(cityLists[0])
+
+const cityUserLists = computed(() => {
+    return data.filter(item => item.city === cityName.value)
+})
+        
+        return { data, n, cityLists,cityName,cityUserLists }
     }
 }
 </script>
@@ -23,13 +37,17 @@ export default {
 <template>
     <div>
         <h1>About</h1>
+        <label for="city-select">Select a city:</label>
+        <select id="city-select" v-model="cityName">
+        <option v-for="(city) in cityLists" :key="city">{{ city }}</option>
+        </select>
         <table>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Gender</th>
             </tr>
-            <tr :key="item.id" v-for="(item) in data">
+            <tr :key="item.id" v-for="(item) in cityUserLists">
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }} - {{ item.city }}</td>
                 <td>{{ item.gender }}</td>
