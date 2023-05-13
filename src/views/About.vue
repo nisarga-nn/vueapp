@@ -21,10 +21,12 @@ export default {
         <h1>About</h1>
         <table>
             <tr>
+                <th>Sr No.</th>
                 <th>Name</th>
                 <th>Gender</th>
             </tr>
-            <tr :key="item" v-for="item in data">
+            <tr :key="item" v-for="(item, index) in data">
+                <td>{{ index + 1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.gender }}</td>
             </tr>
