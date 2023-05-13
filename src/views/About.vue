@@ -3,13 +3,17 @@ export default {
     name: 'AboutPage',
     setup() {
         const data = [{
+            id: 1,
             name: "Prashant",
-            gender: "Male"
+            gender: "Male", city: "Dadar"
         }, {
+            id: 2,
             name: "Nisarga",
-            gender: "Male"
+            gender: "Male", city: "Mulund"
         },
-        { name: "Swara", gender: "Female" }]
+        {
+            id: 3, name: "Swara", gender: "Female", city: "Dadar"
+        }]
         const n = data.length
         return { data, n }
     }
@@ -21,13 +25,13 @@ export default {
         <h1>About</h1>
         <table>
             <tr>
-                <th>Sr No.</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Gender</th>
             </tr>
-            <tr :key="item" v-for="(item, index) in data">
+            <tr :key="index" v-for="(item, index) in data">
                 <td>{{ index + 1 }}</td>
-                <td>{{ item.name }}</td>
+                <td>{{ item.name }} - {{ item.city }}</td>
                 <td>{{ item.gender }}</td>
             </tr>
         </table>
