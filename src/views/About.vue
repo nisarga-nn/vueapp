@@ -29,8 +29,8 @@ export default {
                 <th>Name</th>
                 <th>Gender</th>
             </tr>
-            <tr :key="index" v-for="(item, index) in data">
-                <td>{{ index + 1 }}</td>
+            <tr :key="item.id" v-for="(item) in data">
+                <td>{{ item.id }}</td>
                 <td>{{ item.name }} - {{ item.city }}</td>
                 <td>{{ item.gender }}</td>
             </tr>
